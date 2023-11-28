@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learn_api/response.dart';
+import 'package:learn_api/ui/bdwash_all_catagory.dart';
+import 'package:learn_api/ui/products_ui.dart';
 
 import 'model_class/model.dart';
 
@@ -11,24 +13,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<DataModel> data = [];
-  bool isResponds = false;
-  var errorMsg = "";
-  fetchData ()async{
-    var responds = await AllPosts.allPost();
-    if(responds!=null){
-      data.addAll(responds);
-      isResponds = true;
-    }else{
-      errorMsg= " Error";
-    }
-    setState(() {
 
-    });
-  }
   @override
   void initState() {
-    fetchData();
     super.initState();
   }
   @override
@@ -39,25 +26,15 @@ class _HomeState extends State<Home> {
       ),
       body: Container(
         child:Center(
-          child: dataValid(),
+          child: Column(
+            children: [
+              ElevatedButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const BDWashAllCategory())), child: Text("BD Wash")),
+              ElevatedButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const ProductsUi())), child: Text("Product card")),
+
+            ],
+          ),
         ) ,
       ),
     );
   }
- dataValid(){
-   if( data.isNotEmpty && isResponds){
-     return ListView.builder(itemBuilder: (context,index){
-       return ListTile(
-         title: Text(data[index].title),
-         subtitle: Text(data[index].body),
-         leading: Text("${data[index].id}"),
-       );
-     });
-
-   } else if( errorMsg.isNotEmpty){
-     return Text(errorMsg);
-   } else {
-     return CircularProgressIndicator();
-   }
- }
 }

@@ -33,8 +33,11 @@ class _ProductsUiState extends State<ProductsUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title:const Text(" Product card"),
+      ),
       body: SizedBox(
-        height: MediaQuery.sizeOf(context).height*0.70,
+        height: MediaQuery.sizeOf(context).height*0.45,
         child: dataView(),
       ),
     );
@@ -55,33 +58,37 @@ class _ProductsUiState extends State<ProductsUi> {
                 borderRadius: BorderRadius.circular(15)
               ),
               clipBehavior: Clip.hardEdge,
-              child:Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      child:image(data[index].image.small) ,
-                    ),
-                    RichText(text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: dataIndex.formattedFinalProductPrice,style: const TextStyle(color: Colors.black)
-                        ),
-                        TextSpan(
-                          text: dataIndex.formattedRegularPrice,
-                          style: const TextStyle(decoration: TextDecoration.lineThrough,color: Colors.grey,height: 3)
-                        )
-                      ]
-                    )),
-                    Text(dataIndex.name,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color: Colors.black),),
-                    OutlinedButton(onPressed: (){}, child: const Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Text("Buy Now"),
-                    ))
-
-                  ],
-                ),
+              child:Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    child:image(data[index].image.small) ,
+                  ),
+                 Container(
+                   padding: EdgeInsets.all(10),
+                   child: Column(
+                     children: [
+                       RichText(text: TextSpan(
+                           children: [
+                             TextSpan(
+                                 text: dataIndex.formattedFinalProductPrice,style: const TextStyle(color: Colors.black)
+                             ),
+                             TextSpan(
+                                 text: dataIndex.formattedRegularPrice,
+                                 style: const TextStyle(decoration: TextDecoration.lineThrough,color: Colors.grey,height: 3)
+                             )
+                           ]
+                       )),
+                       Text(dataIndex.name,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color: Colors.black),),
+                       OutlinedButton(onPressed: (){}, child: const Padding(
+                         padding: EdgeInsets.all(10.0),
+                         child: Text("Buy Now"),
+                       ))
+                     ],
+                   ),
+                 )
+              
+                ],
               )
             );
           });
