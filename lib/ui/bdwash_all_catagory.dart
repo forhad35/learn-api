@@ -7,9 +7,8 @@ class BDWashAllCategory extends StatefulWidget {
   State<BDWashAllCategory> createState() => _BDWashAllCategoryState();
 }
 class _BDWashAllCategoryState extends State<BDWashAllCategory> with TickerProviderStateMixin{
-   late List<Datum> data=[];
+    List<Datum>  data = [];
    dynamic _tabController;
-   List<Widget> tabBarView=[];
    fetchData()async{
     var response = await AllCategory.allCategory();
     data = response.data;
@@ -22,10 +21,10 @@ class _BDWashAllCategoryState extends State<BDWashAllCategory> with TickerProvid
     fetchData();
     super.initState();
   }
-  int index = 0;
+
   @override
   Widget build(BuildContext context) {
-    tabBarBody();
+    // tabBarBody();
     return  Scaffold(
       appBar: AppBar(
         title: const Text("All Category"),
@@ -40,41 +39,28 @@ class _BDWashAllCategoryState extends State<BDWashAllCategory> with TickerProvid
                 height: 60,
                 child: TabBar(
                   controller: _tabController,
-                  tabs: [
-                    for( var item in data)
-                      Tab(
-                        text: item.name,
-                      )
-                  ],),
+                  tabs: data.map((Datum category) =>Tab(
+                    text: category.name,
+                  ) ).toList(),
+                ),
               ),
-              Container(
+              SizedBox(
                 width: 500,
                 height: 700,
-                // color: Colors.red,
                 child: TabBarView(
                   controller: _tabController,
-                  children: tabBarView
+                  children:data.map((category) => Column(
+                      children: category.products.map((Product item) => ListTile(
+                        title: Text(item.name),
+                        leading: Text(item.price.toString()),
+                      )).toList()
+                  )).toList()
+
                 ),)]
         ),
         ):const Center(child: CircularProgressIndicator()),
     );
   }
-   tabBarBody(){
-     for(var category in data){
-       tabBarView.add(Column(
-         children: [
-           for(var items in category.products)
-             ListTile(
-               contentPadding:const EdgeInsets.all(10),
-               leading: Image.network(items.image),
-               title: Text(items.name),
-               trailing: Text(items.price.toString()),
-
-             )
-         ],
-       ));
-     }
-   }
 }
 
 
