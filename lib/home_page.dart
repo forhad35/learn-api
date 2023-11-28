@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learn_api/response.dart';
 import 'package:learn_api/ui/bdwash_all_catagory.dart';
+import 'package:learn_api/ui/bosssend_all-category.dart';
 import 'package:learn_api/ui/products_ui.dart';
 
 import 'model_class/model.dart';
@@ -30,6 +31,7 @@ class _HomeState extends State<Home> {
             children: [
               ElevatedButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const BDWashAllCategory())), child: Text("BD Wash")),
               ElevatedButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const ProductsUi())), child: Text("Product card")),
+              ElevatedButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const BosssendAllCategory())), child: Text("Bosssend Category")),
 
             ],
           ),

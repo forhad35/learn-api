@@ -25,7 +25,7 @@ class _BDWashAllCategoryState extends State<BDWashAllCategory> with TickerProvid
   int index = 0;
   @override
   Widget build(BuildContext context) {
-    // tabBarBody();
+    tabBarBody();
     return  Scaffold(
       appBar: AppBar(
         title: const Text("All Category"),
@@ -33,53 +33,29 @@ class _BDWashAllCategoryState extends State<BDWashAllCategory> with TickerProvid
       body: data.isNotEmpty ?SizedBox(
         width: MediaQuery.sizeOf(context).width,
         height: MediaQuery.sizeOf(context).height,
-        child: DefaultTabController(
-          length: data.length,
-          child: Column(
-              children: [
-                Container(
-                  color: Colors.green,
-                  height: 60,
-                  child: TabBar(
-                    onTap: (item){
-                      index = item;
-                      setState(() {
-                        
-                      });
-                    },
-                    // controller: _tabController,
-                    tabs: [
-                      for( var item in data)
-                        Tab(
-                          text: item.name,
-                        )
-                    ],),
-                ),
-                Container(
-                  width: 500,
-                  height: 500,
-                  // color: Colors.red,
-                  child: TabBarView(
-                    // controller: _tabController,
-                    children: [
-                      Container(
-                        child:Column(
-                          children: [
-                            for(var items in data[index].products)
-                              ListTile(
-                                contentPadding:const EdgeInsets.all(10),
-                                leading: Image.network(items.image),
-                                title: Text(items.name),
-                                trailing: Text(items.price.toString()),
-
-                              )
-                          ],
-                        ),
+        child: Column(
+            children: [
+              Container(
+                color: Colors.green,
+                height: 60,
+                child: TabBar(
+                  controller: _tabController,
+                  tabs: [
+                    for( var item in data)
+                      Tab(
+                        text: item.name,
                       )
-                    ],
-                  ),)]
-          ),
-        )
+                  ],),
+              ),
+              Container(
+                width: 500,
+                height: 700,
+                // color: Colors.red,
+                child: TabBarView(
+                  controller: _tabController,
+                  children: tabBarView
+                ),)]
+        ),
         ):const Center(child: CircularProgressIndicator()),
     );
   }
