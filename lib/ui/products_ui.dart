@@ -43,7 +43,7 @@ class _ProductsUiState extends State<ProductsUi> {
     );
   }
   dataView(){
-    if(data.isNotEmpty && isHas){
+     if(data.isNotEmpty && isHas){
       int dataItems = data.length;
       return ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -93,7 +93,7 @@ class _ProductsUiState extends State<ProductsUi> {
             );
           });
     }else {
-        return const CircularProgressIndicator();
+        return const Center(child: CircularProgressIndicator(),);
       }
   }
  Widget image (String url){
